@@ -6,7 +6,7 @@ import pl.Documents.MyDocuments.model.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MySearchService implements SearchEngine {
+public class MySearchEngine implements SearchEngine {
 
     @Override
     //przeszukuje listę dokumentów i zwraca tylko te, które mają określony typ. implementuje findByType z SearchEngine
@@ -39,8 +39,44 @@ public class MySearchService implements SearchEngine {
         document.setName("Szablon książki");
         document.setType(type);
         document.setLocation("/Documents/Book Template.pdf");
-
         result.add(document);
+
+
+        Type webType = new Type();
+        webType.setName("WEB");
+        webType.setDesc("Łącze sieciowe");
+        webType.setExtension(".url");
+
+        Document webDocument = new Document();
+        webDocument.setName("Strona uczelni");
+        webDocument.setType(webType);
+        webDocument.setLocation("https://example.com");
+        result.add(webDocument);
+
+
+        Type imageType = new Type();
+        imageType.setName("IMAGE");
+        imageType.setDesc("Obraz JPEG");
+        imageType.setExtension(".jpg");
+
+        Document imageDocument = new Document();
+        imageDocument.setName("Zdjęcie wakacyjme");
+        imageDocument.setType(imageType);
+        imageDocument.setLocation("/Documents/Wakacje2026.jpg");
+        result.add(imageDocument);
+
+
+        Type wordType = new Type();
+        wordType.setName("WORD");
+        wordType.setDesc("Dokument Microsoft Word");
+        wordType.setExtension(".docx");
+
+        Document wordDocument = new Document();
+        wordDocument.setName("Notatki z zajęć");
+        wordDocument.setType(wordType);
+        wordDocument.setLocation("/Documents/Notatki.docx");
+        result.add(wordDocument);
+
 
         return result;
     }

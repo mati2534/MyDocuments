@@ -13,8 +13,16 @@ public class Type {
         this.name = name;
     }
 
+    public String getDesc() {
+        return desc;
+    }
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+
+    public String getExtension() {
+        return extension;
     }
 
     public void setExtension(String extension) {
