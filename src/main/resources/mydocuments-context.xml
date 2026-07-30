@@ -3,14 +3,80 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-
+    <!--WYKORZYSTYWANE PRZY KORZYSTANIU Z MySearchEngine-->
     <!--engine – instancja MySearchEngine, która obsługuje wyszukiwanie i wyświetlanie dokumentów.-->
-    <bean id="engine" class="pl.Documents.MyDocuments.service.MySearchEngine" />
+    <!--<bean id="engine" class="pl.Documents.MyDocuments.service.MySearchEngine" />-->
 
-    <bean id="documentType" class="pl.Documents.MyDocuments.model.Type">
+    <!--<bean id="documentType" class="pl.Documents.MyDocuments.model.Type">
         <property name="name" value="WEB" />
         <property name="desc" value="Łącze sieciowe" />
         <property name="extension" value=".url" />
-    </bean>
+    </bean>-->
 
-</beans>
+
+    <!-- engine – tworzy obiekt klasy ServiceSearchEngine.-->
+     <bean id="engine" class="pl.Documents.MyDocuments.service.ServiceSearchEngine" >
+         <!--Właściwość documentDAO otrzymuje referencję do beana documentDAO.Spring wywoła więc setDocumentDAO(documentDAO).-->
+         <!--Pierwsze documentDAO to nazwa właściwości (Spring wywoła setDocumentDAO(...)), a wartość w ref to identyfikator beana, który ma zostać przekazany.-->
+         <property name="documentDAO" ref="documentDAO"></property>
+     </bean>
+
+    <!--documentDAO – tworzy obiekt klasy DocumentRepository.Spring wywoła odpowiednio metody setDoc1(), setDoc2(), setDoc3() i setDoc4()-->
+     <bean id="documentDAO" class="pl.Documents.MyDocuments.data.DocumentRepository">
+         <property name="doc1" ref="doc1"/>
+         <property name="doc2" ref="doc2"/>
+         <property name="doc3" ref="doc3"/>
+         <property name="doc4" ref="doc4"/>
+     </bean>
+
+     <bean id="doc1" class="pl.Documents.MyDocuments.mode.Document">
+         <property name="name" value="Szablon książki"/>
+         <!--ref="" oznacza referencję do innego beana Springa, czyli przekazanie gotowego obiektu.-->
+         <property name="type" ref="pdfType"/>
+         <property name="location" value="/Users/felipeg/Documents/Random/Book Template.pdf"/>
+     </bean>
+
+     <bean id="doc2" class="pl.Documents.MyDocuments.mode.Document">
+         <property name="name" value="Przykładowa umowa"/>
+         <property name="type">
+             <bean id="pdfType" class="pl.Documents.MyDocuments.model.Type">
+             <property name="name" value="PDF"/>
+             <property name="desc" value="Portable Document Format"/>
+             <property name="extension" value=".pdf"/>
+             </bean>
+         </property>
+         <property name="location" value="/Users/felipeg/Documents/Contracts/Sample Contract.pdf"/>
+     </bean>
+
+     <bean id="doc3" class="pl.Documents.MyDocuments.mode.Document">
+         <property name="name" value="Clustering with RabbitMQ"/>
+         <property name="type" ref="noteType"/>
+         <property name="location" value="/Users/felipeg/Documents/Random/Clustering with RabbitMQ.txt"/>
+     </bean>
+
+     <bean id="doc4" class="pl.Documents.MyDocuments.mode.Document">
+         <property name="name" value="Pro Spring Security Book"/>
+         <property name="type" ref="webType"/>
+         <property name="location" value="https://www.apress.com/98765432345"/>
+     </bean>
+
+     <bean id="webType" class="pl.Documents.MyDocuments.model.Type">
+         <property name="name" value="WEB"/>
+         <property name="desc" value="Łącze sieciowe"/>
+         <property name="extension" value=".url"/>
+     </bean>
+
+     <bean id="pdfType" class="pl.Documents.MyDocuments.model.Type">
+         <property name="name" value="PDF"/>
+         <property name="desc" value="Portable Document Format"/>
+         <property name="extension" value=".pdf"/>
+     </bean>
+
+     <bean id="noteType" class="pl.Documents.MyDocuments.model.Type">
+         <property name="name" value="NOTE"/>
+         <property name="desc" value="Notatki tekstowe"/>
+         <property name="extension" value=".txt"/>
+     </bean>
+
+
+ </beans>

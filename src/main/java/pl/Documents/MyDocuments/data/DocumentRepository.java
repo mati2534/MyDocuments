@@ -2,7 +2,7 @@ package pl.Documents.MyDocuments.data;
 
 import pl.Documents.MyDocuments.model.Document;
 
-public class DocumentRepository {
+public class DocumentRepository implements DocumentDAO {
 
     private Document doc1;
     private Document doc2;
