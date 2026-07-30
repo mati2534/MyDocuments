@@ -3,6 +3,7 @@ package pl.Documents.MyDocuments;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportResource;
+import pl.Documents.MyDocuments.service.MySearchEngine;
 
 @SpringBootApplication
 // podpięcie pliku mydocuments-context.xml
@@ -10,6 +11,7 @@ import org.springframework.context.annotation.ImportResource;
 public class MyDocumentsApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(MyDocumentsApplication.class, args);
 	}
 

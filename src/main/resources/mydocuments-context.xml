@@ -3,6 +3,8 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+
+    <!--engine – instancja MySearchEngine, która obsługuje wyszukiwanie i wyświetlanie dokumentów.-->
     <bean id="engine" class="pl.Documents.MyDocuments.service.MySearchEngine" />
 
     <bean id="documentType" class="pl.Documents.MyDocuments.model.Type">
