@@ -29,45 +29,40 @@ public class AnnotatedDocumentRepository implements DocumentDAO {
         document.setType(type);
         document.setLocation("/Documents/Book Template.pdf");
 
-        result.add(document);
-
-        Type webType = new Type();
-        webType.setName("WEB");
-        webType.setDesc("Łącze sieciowe");
-        webType.setExtension(".url");
-
-        Document webDocument = new Document();
-        webDocument.setName("Strona uczelni");
-        webDocument.setType(webType);
-        webDocument.setLocation("https://example.com");
-
-        result.add(webDocument);
+            result.add(document);
 
 
-        Type imageType = new Type();
-        imageType.setName("IMAGE");
-        imageType.setDesc("Obraz JPEG");
-        imageType.setExtension(".jpg");
+        document = new Document();
+        document.setName("Przykładowa umowa");
+        document.setType(type);
+        document.setLocation("/Users/felipeg/Documents/Contracts/Przykladowa umowa.pdf");
 
-        Document imageDocument = new Document();
-        imageDocument.setName("Zdjęcie wakacyjme");
-        imageDocument.setType(imageType);
-        imageDocument.setLocation("/Documents/Wakacje2026.jpg");
-
-        result.add(imageDocument);
+            result.add(document);
 
 
-        Type wordType = new Type();
-        wordType.setName("WORD");
-        wordType.setDesc("Dokument Microsoft Word");
-        wordType.setExtension(".docx");
+        type = new Type();
+        type.setName("NOTE");
+        type.setDesc("Notatki tekstowe");
+        type.setExtension(".txt");
 
-        Document wordDocument = new Document();
-        wordDocument.setName("Notatki z zajęć");
-        wordDocument.setType(wordType);
-        wordDocument.setLocation("/Documents/Notatki.docx");
+        document = new Document();
+        document.setName("Clustering with RabbitMQ");
+        document.setType(type);
+        document.setLocation("/Users/felipeg/Documents/Random/Clustering with RabbitMQ.txt");
 
-        result.add(wordDocument);
+            result.add(document);
+
+        type = new Type();
+        type.setName("WEB");
+        type.setDesc("Łącze sieciowe");
+        type.setExtension(".url");
+
+        document = new Document();
+        document.setName("Pro Spring Security Book");
+        document.setType(type);
+        document.setLocation("http://www.apress.com/9874456789");
+
+            result.add(document);
 
         //tworzy nową tablicę typu Document[] o rozmiarze równym liczbie elementów w liście result, metoda toArray() wypełnia tę tablicę dokumentami z listy result i zwraca ją jako Document[]
         return result.toArray(new Document[result.size()]);
