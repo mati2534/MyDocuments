@@ -2,6 +2,7 @@ package pl.Documents.MyDocuments;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import pl.Documents.MyDocuments.model.Document;
 import pl.Documents.MyDocuments.model.Type;
 import pl.Documents.MyDocuments.service.MySearchEngine;
@@ -12,6 +13,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+//wymuszenie uzycia konfiguracji xml w application.properies
+@ActiveProfiles("xml")
 class MyDocumentsApplicationTests {
 
 	private SearchEngine engine = new MySearchEngine();

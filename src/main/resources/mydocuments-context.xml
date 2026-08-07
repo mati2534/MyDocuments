@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
+ <!--użycie sposobu konfiguracji springa: xml-->
+<beans profile="xml" xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
@@ -14,7 +15,7 @@
     </bean>-->
 
 
-    <!-- engine – tworzy obiekt klasy ServiceSearchEngine.-->
+    <!-- engine – tworzy obiekt klasy SearchEngineService.-->
      <bean id="engine" class="pl.Documents.MyDocuments.service.SearchEngineService" >
          <!--Właściwość documentDAO otrzymuje referencję do beana documentDAO.Spring wywoła więc setDocumentDAO(documentDAO).-->
          <!--Pierwsze documentDAO to nazwa właściwości (Spring wywoła setDocumentDAO(...)), a wartość w ref to identyfikator beana, który ma zostać przekazany.-->

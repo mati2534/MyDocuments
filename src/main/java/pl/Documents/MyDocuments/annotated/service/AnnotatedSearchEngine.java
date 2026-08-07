@@ -1,6 +1,7 @@
 package pl.Documents.MyDocuments.annotated.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import pl.Documents.MyDocuments.model.Document;
 import pl.Documents.MyDocuments.model.Type;
@@ -13,6 +14,8 @@ import java.util.List;
 
 //Spring automatycznie tworzy obiekt tej klasy i rejestruje go pod nazwą engine
 @Service("engine") // to samo co w xml =  <bean id="engine" class="pl.Documents.MyDocuments.annotated.service.AnnotatedSearchEngine"/>
+//użycie sposobu konfiguracji springa: annotations.
+@Profile("annotations")
 public class AnnotatedSearchEngine implements SearchEngine {
     @Autowired // to samo co w xml = <property name="documentDAO" ref="documentDAO"/>
     private DocumentDAO documentDAO;

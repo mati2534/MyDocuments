@@ -4,13 +4,15 @@ package pl.Documents.MyDocuments;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.test.context.ActiveProfiles;
 import pl.Documents.MyDocuments.model.Document;
 import pl.Documents.MyDocuments.model.Type;
 import pl.Documents.MyDocuments.service.SearchEngine;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
-
+//wymuszenie uzycia konfiguracji xml w application.properies
+@ActiveProfiles("xml")
 public class MyDocumentsTestWithSpring {
 
     private ClassPathXmlApplicationContext context;

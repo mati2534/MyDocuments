@@ -2,6 +2,7 @@ package pl.Documents.MyDocuments.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import pl.Documents.MyDocuments.data.DocumentDAO;
 import pl.Documents.MyDocuments.data.DocumentRepository;
 import pl.Documents.MyDocuments.model.Document;
@@ -14,6 +15,8 @@ import java.util.Map;
 
 //Spring odczytuje klase, a metody oznaczone @Bean traktuje jako instrukcje tworzenia obiektów zarządzanych przez Springa.
 @Configuration
+//użycie sposobu konfiguracji springa: java.
+@Profile("java")
 public class MyDocumentsContext {
 
     // Map - magazyn obiektów.
