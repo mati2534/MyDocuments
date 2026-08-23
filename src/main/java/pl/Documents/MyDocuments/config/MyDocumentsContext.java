@@ -1,8 +1,11 @@
 package pl.Documents.MyDocuments.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.Scope;
 import pl.Documents.MyDocuments.data.DocumentDAO;
 import pl.Documents.MyDocuments.data.DocumentRepository;
 import pl.Documents.MyDocuments.model.Document;
@@ -18,6 +21,7 @@ import java.util.Map;
 //użycie sposobu konfiguracji springa: java.
 @Profile("java")
 public class MyDocumentsContext {
+    private static final Logger log = LoggerFactory.getLogger(MyDocumentsContext.class);
 
     // Map - magazyn obiektów.
     private Map<String, Document> documents = new HashMap<String, Document>();
@@ -31,9 +35,17 @@ public class MyDocumentsContext {
     }
 
     @Bean
+    //powoduje, że kontener tworzy nową instancję komponentu za każdym razem, gdy pojawia się żądanie jego pobrania.
+    @Scope("prototype")
     public SearchEngine engine(){
         SearchEngineService engine = new SearchEngineService();
         engine.setDocumentDAO(documentDAO());
+
+        if(log.isDebugEnabled())
+        {
+            log.debug("Utworzono SearchEngine" + engine);
+        }
+
         return engine;
     }
 

@@ -16,19 +16,46 @@
 
 
     <!-- engine – tworzy obiekt klasy SearchEngineService.-->
-     <bean id="engine" class="pl.Documents.MyDocuments.service.SearchEngineService" >
+     <bean id="engine" class="pl.Documents.MyDocuments.service.SearchEngineService"  scope="prototype">
          <!--Właściwość documentDAO otrzymuje referencję do beana documentDAO.Spring wywoła więc setDocumentDAO(documentDAO).-->
          <!--Pierwsze documentDAO to nazwa właściwości (Spring wywoła setDocumentDAO(...)), a wartość w ref to identyfikator beana, który ma zostać przekazany.-->
          <property name="documentDAO" ref="documentDAO"></property>
      </bean>
 
-    <!--documentDAO – tworzy obiekt klasy DocumentRepository.Spring wywoła odpowiednio metody setDoc1(), setDoc2(), setDoc3() i setDoc4() wysyłajac do  DocumentRepository-->
-     <bean id="documentDAO" class="pl.Documents.MyDocuments.data.DocumentRepository">
-         <property name="doc1" ref="doc1"/>
-         <property name="doc2" ref="doc2"/>
-         <property name="doc3" ref="doc3"/>
-         <property name="doc4" ref="doc4"/>
+    <!--documentDAO – tworzy obiekt klasy DocumentRepository i wstrzykuje do nich listę czterech dokumentów.-->
+     <bean id="documentDAO" class="pl.Documents.MyDocuments.data.DocumentRepository" scope="prototype">
+         <property name="documents">
+             <list>
+                 <ref bean="doc1"/>
+                 <ref bean="doc2"/>
+                 <ref bean="doc3"/>
+                 <ref bean="doc4"/>
+             </list>
+         </property>
      </bean>
+
+    <!--abstract oznacza że nie można tworzyć egzemplarzy tego ziarna (są scalane z anotherTypeDAO).-->
+    <bean id="typeDAO" abstract="true" class="pl.Documents.MyDocuments.data.TypeDataRepository">
+        <property name="types">
+            <map>
+                <!--key to zwykły tekstowy identyfikator w mapie, a value-ref oznacza odwołanie do innego beana Springa o podanym id-->
+                <entry key="webType" value-ref="webType"/>
+                <entry key="pdfType" value-ref="pdfType"/>
+                <entry key="noteType" value-ref="noteType"/>
+            </map>
+        </property>
+    </bean>
+
+    <!--tworzy repozytorium typów dokumentów i przekazuje mu mapę typów.Dziedziczy wartości beana typeDAO.-->
+    <bean id="anotherTypeDAO" parent="typeDAO">
+        <property name="types">
+            <map merge="true">
+                <entry key="pagesType" value-ref="pagesType"/>
+                <entry key="numbersType" value-ref="numbersType"/>
+                <entry key="keynoteType" value-ref="keynoteType"/>
+            </map>
+        </property>
+    </bean>
 
      <bean id="doc1" class="pl.Documents.MyDocuments.model.Document">
          <property name="name" value="Szablon książki"/>
