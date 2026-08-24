@@ -11,8 +11,6 @@ import pl.Documents.MyDocuments.service.SearchEngine;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
-//wymuszenie uzycia konfiguracji xml w application.properies
-@ActiveProfiles("xml")
 public class MyDocumentsTestWithSpring {
 
     private ClassPathXmlApplicationContext context;

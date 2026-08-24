@@ -11,8 +11,7 @@ import pl.Documents.MyDocuments.service.SearchEngine;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-//wymuszenie uzycia konfiguracji xml w application.properies
-@ActiveProfiles("xml")
+
 public class MyDocumentsTest {
     private ClassPathXmlApplicationContext context;
     private SearchEngine engine;
@@ -21,7 +20,6 @@ public class MyDocumentsTest {
     @BeforeEach
     public void setUp() {
         context = new ClassPathXmlApplicationContext("mydocuments-context.xml");
-
     }
 
     @Test

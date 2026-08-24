@@ -15,8 +15,6 @@ import java.util.List;
 
     //Spring automatycznie tworzy obiekt tej klasy i rejestruje go pod nazwą engine
 @Service("engine") // to samo co w xml =  <bean id="engine" class="pl.Documents.MyDocuments.annotated.service.AnnotatedSearchEngine"/>
-    //użycie sposobu konfiguracji springa: annotations.
-@Profile("annotations")
     //powoduje, że kontener tworzy nową instancję komponentu za każdym razem, gdy pojawia się żądanie jego pobrania.
 @Scope("prototype")
 public class AnnotatedSearchEngine implements SearchEngine {

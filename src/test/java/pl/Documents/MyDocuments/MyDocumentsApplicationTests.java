@@ -13,8 +13,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-//wymuszenie uzycia konfiguracji xml w application.properies
-@ActiveProfiles("xml")
 class MyDocumentsApplicationTests {
 
 	private SearchEngine engine = new MySearchEngine();

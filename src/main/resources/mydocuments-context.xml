@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
- <!--użycie sposobu konfiguracji springa: xml-->
-<beans profile="xml" xmlns="http://www.springframework.org/schema/beans"
+<beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
@@ -106,5 +105,22 @@
          <property name="extension" value=".txt"/>
      </bean>
 
+    <bean id="pagesType" class="pl.Documents.MyDocuments.model.Type">
+        <property name="name" value="PAGES"/>
+        <property name="desc" value="Apple Pages document"/>
+        <property name="extension" value=".pages"/>
+    </bean>
+
+    <bean id="numbersType" class="pl.Documents.MyDocuments.model.Type">
+        <property name="name" value="NUMBERS"/>
+        <property name="desc" value="Apple Numbers spreadsheet"/>
+        <property name="extension" value=".numbers"/>
+    </bean>
+
+    <bean id="keynoteType" class="pl.Documents.MyDocuments.model.Type">
+        <property name="name" value="KEYNOTE"/>
+        <property name="desc" value="Apple Keynote presentation"/>
+        <property name="extension" value=".key"/>
+    </bean>
 
  </beans>

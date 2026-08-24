@@ -13,13 +13,12 @@ import pl.Documents.MyDocuments.model.Type;
 import pl.Documents.MyDocuments.service.SearchEngine;
 import pl.Documents.MyDocuments.service.SearchEngineService;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 //Spring odczytuje klase, a metody oznaczone @Bean traktuje jako instrukcje tworzenia obiektów zarządzanych przez Springa.
 @Configuration
-//użycie sposobu konfiguracji springa: java.
-@Profile("java")
 public class MyDocumentsContext {
     private static final Logger log = LoggerFactory.getLogger(MyDocumentsContext.class);
 
@@ -103,10 +102,7 @@ public class MyDocumentsContext {
     //Tworzy DocumentRepository, pobiera dokumenty z mapy i przekazuje je do pól doc1–doc4. Ten obiekt jest potem przekazywany do engine.
     private DocumentDAO documentDAO(){
         DocumentRepository documentDAO = new DocumentRepository();
-        documentDAO.setDoc1(getDocumentFromMap("doc1"));
-        documentDAO.setDoc2(getDocumentFromMap("doc2"));
-        documentDAO.setDoc3(getDocumentFromMap("doc3"));
-        documentDAO.setDoc4(getDocumentFromMap("doc4"));
+        documentDAO.setDocuments(new ArrayList<Document>(documents.values()));
         return documentDAO;
     }
 
