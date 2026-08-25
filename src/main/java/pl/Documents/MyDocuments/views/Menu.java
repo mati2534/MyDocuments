@@ -10,20 +10,23 @@ import org.springframework.core.io.Resource;
 
 public class Menu {
 
-    private ResourcemenuFile = null;
+    //tworzy zmienną menu file typu Resource
+    private Resource menuFile = null;
 
-    public ResourcegetMenuFile(){
+    public Resource getMenuFile(){
         return menuFile;
     }
 
-    public void setMenuFile(ResourcemenuFile){
-        this.menuFile = menuFile();
+    public void setMenuFile(Resource menuFile){
+        this.menuFile = menuFile;
     }
 
     public void printMenu(){
         try{
+            //otwiera strumień wejściowy do odczytania pliku
             InputStream stream = getMenuFile().getInputStream();
             Scanner scanner = new Scanner(stream);
+            //szczytanie oraz wypisanie pliku linijka po linijce
             while(scanner.hasNext()){
                 out.println(scanner.nextLine());
             }
