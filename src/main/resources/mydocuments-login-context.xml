@@ -9,7 +9,7 @@
 
     <bean id="login" class="pl.Documents.MyDocuments.service.LoginService">
         <property name="username" value="${user.email}"/>
-        <property name="password" value="${user.pass}"/>
+        <property name="password" value="${user.password}"/>
     </bean>
 
     <!-- engine – tworzy obiekt klasy SearchEngineService.-->
