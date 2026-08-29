@@ -3,14 +3,9 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!--umożliwia podstawianie wartości z zewnętrznych plików .properties-->
-    <bean id="environmentProperies" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="classpath:data/env_dev.properties"/>
-    </bean>
-
-    <bean id="login" class="pl.Documents.MyDocuments.service.LoginService">
-        <property name="username" value="${user.email}"/>
-        <property name="password" value="${user.password}"/>
+    <!--służy do internacjonalizacji (i18n) i lokalizacji, czyli dostosowywania języka aplikacji do kraju użytkownika.-->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="data/dictionary"/>
     </bean>
 
     <!-- engine – tworzy obiekt klasy SearchEngineService.-->
@@ -121,5 +116,4 @@
         <property name="desc" value="Apple Keynote presentation"/>
         <property name="extension" value=".key"/>
     </bean>
-
 </beans>
