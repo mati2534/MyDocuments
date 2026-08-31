@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    <context:component-scan base-package="pl.Documents.MyDocuments.service"/>
+
+    <!--działa tylko przy aktywnym profilu dev. Tworzy bean engine, czyli obiekt SearchEngineService, i wstrzykuje do niego documentDAO.-->
+    <beans profile="dev">
+        <bean id="engine" class="pl.Documents.MyDocuments.service.SearchEngineService">
+            <property name="documentDAO" ref="documentDAO"/>
+        </bean>
+    </beans>
+
+    <beans profile="dev,qa">
+        <!--documentDAO – tworzy obiekt klasy DocumentRepository i wstrzykuje do nich listę czterech dokumentów.-->
+        <bean id="documentDAO" class="pl.Documents.MyDocuments.data.DocumentRepository">
+            <property name="documents">
+                <list>
+                    <ref bean="doc1"/>
+                    <ref bean="doc2"/>
+                    <ref bean="doc3"/>
+                    <ref bean="doc4"/>
+                </list>
+            </property>
+        </bean>
+
+        <!--abstract oznacza że nie można tworzyć egzemplarzy tego ziarna (są scalane z anotherTypeDAO).-->
+        <bean id="typeDAO" abstract="true" class="pl.Documents.MyDocuments.data.TypeDataRepository">
+            <property name="types">
+                <map>
+                    <!--key to zwykły tekstowy identyfikator w mapie, a value-ref oznacza odwołanie do innego beana Springa o podanym id-->
+                    <entry key="webType" value-ref="webType"/>
+                    <entry key="pdfType" value-ref="pdfType"/>
+                    <entry key="noteType" value-ref="noteType"/>
+                </map>
+            </property>
+        </bean>
+
+        <!--tworzy repozytorium typów dokumentów i przekazuje mu mapę typów.Dziedziczy wartości beana typeDAO.-->
+        <bean id="anotherTypeDAO" parent="typeDAO">
+            <property name="types">
+                <map merge="true">
+                    <entry key="pagesType" value-ref="pagesType"/>
+                    <entry key="numbersType" value-ref="numbersType"/>
+                    <entry key="keynoteType" value-ref="keynoteType"/>
+                </map>
+            </property>
+        </bean>
+
+        <bean id="doc1" class="pl.Documents.MyDocuments.model.Document">
+            <property name="name" value="Szablon książki"/>
+            <!--ref="" oznacza referencję do innego beana Springa, czyli przekazanie gotowego obiektu.-->
+            <property name="type" ref="pdfType"/>
+            <property name="location" value="/Users/felipeg/Documents/Random/Book Template.pdf"/>
+        </bean>
+
+        <bean id="doc2" class="pl.Documents.MyDocuments.model.Document">
+            <property name="name" value="Przykładowa umowa"/>
+            <property name="type">
+                <bean id="pdfType" class="pl.Documents.MyDocuments.model.Type">
+                    <property name="name" value="PDF"/>
+                    <property name="desc" value="Portable Document Format"/>
+                    <property name="extension" value=".pdf"/>
+                </bean>
+            </property>
+            <property name="location" value="/Users/felipeg/Documents/Contracts/Sample Contract.pdf"/>
+        </bean>
+
+        <bean id="doc3" class="pl.Documents.MyDocuments.model.Document">
+            <property name="name" value="Clustering with RabbitMQ"/>
+            <property name="type" ref="noteType"/>
+            <property name="location" value="/Users/felipeg/Documents/Random/Clustering with RabbitMQ.txt"/>
+        </bean>
+
+        <bean id="doc4" class="pl.Documents.MyDocuments.model.Document">
+            <property name="name" value="Pro Spring Security Book"/>
+            <property name="type" ref="webType"/>
+            <property name="location" value="https://www.apress.com/98765432345"/>
+        </bean>
+
+        <bean id="webType" class="pl.Documents.MyDocuments.model.Type">
+            <property name="name" value="WEB"/>
+            <property name="desc" value="Łącze sieciowe"/>
+            <property name="extension" value=".url"/>
+        </bean>
+
+        <bean id="pdfType" class="pl.Documents.MyDocuments.model.Type">
+            <property name="name" value="PDF"/>
+            <property name="desc" value="Portable Document Format"/>
+            <property name="extension" value=".pdf"/>
+        </bean>
+
+        <bean id="noteType" class="pl.Documents.MyDocuments.model.Type">
+            <property name="name" value="NOTE"/>
+            <property name="desc" value="Notatki tekstowe"/>
+            <property name="extension" value=".txt"/>
+        </bean>
+
+        <bean id="pagesType" class="pl.Documents.MyDocuments.model.Type">
+            <property name="name" value="PAGES"/>
+            <property name="desc" value="Apple Pages document"/>
+            <property name="extension" value=".pages"/>
+        </bean>
+
+        <bean id="numbersType" class="pl.Documents.MyDocuments.model.Type">
+            <property name="name" value="NUMBERS"/>
+            <property name="desc" value="Apple Numbers spreadsheet"/>
+            <property name="extension" value=".numbers"/>
+        </bean>
+
+        <bean id="keynoteType" class="pl.Documents.MyDocuments.model.Type">
+            <property name="name" value="KEYNOTE"/>
+            <property name="desc" value="Apple Keynote presentation"/>
+            <property name="extension" value=".key"/>
+        </bean>
+    </beans>
+</beans>
