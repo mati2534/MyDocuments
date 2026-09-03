@@ -29,6 +29,7 @@ public class MyDocumentsWithCustomProfilesTest {
     private Type webType;
 
     //@IfProfileValue(name = "environment", value = "dev") - JUnit4
+    //służy do warunkowego uruchamiania testów.
     @EnabledIfSystemProperty(named = "environment", matches = "dev")
     @Test
     public void testUsingSpringTestWithCustomProfilesX(){
@@ -51,6 +52,7 @@ public class MyDocumentsWithCustomProfilesTest {
     }
 
     //@IfProfileValue(name ="os.name", value = "Unix") - JUnit4
+    //służy do warunkowego uruchamiania testów.
     @EnabledIfSystemProperty(named="os.name", matches = "Unix")
     @Test
     public void testUsingSpringTestWithCustomProfilesY(){
