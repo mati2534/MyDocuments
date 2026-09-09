@@ -15,14 +15,10 @@ public class SearchEngineService implements SearchEngine{
 
     //Logger - typ obiektu odpowiedzialnego za zapisywanie komunikatów w logach.
     //LoggerFactory.getLogger(SearchEngineService.class) — tworzy/pobiera logger przypisany do tej klasy. Dzięki temu w logu wiadomo, skąd pochodzi komunikat.
-    private static final Logger log = LoggerFactory.getLogger(SearchEngineService.class);
+    //private static final Logger log = LoggerFactory.getLogger(SearchEngineService.class);
     private DocumentDAO documentDAO;
 
     public SearchEngineService() {
-        //log.isDebugEnabled() — sprawdza, czy logowanie na poziomie DEBUG jest włączone. Pozwala uniknąć niepotrzebnego składania komunikatu, gdy debugowanie jest wyłączone.
-        if(log.isDebugEnabled()){
-            log.debug("Utworzono egzemplarz klasy SearchEngineService: " + this);
-        }
 
     }
 
@@ -31,9 +27,6 @@ public class SearchEngineService implements SearchEngine{
     }
 
     public void setDocumentDAO(DocumentDAO documentDAO) {
-        if(log.isDebugEnabled()){
-            log.debug("Utworzono egzemplarz implementacji DocumentDAO: " + documentDAO);
-        }
         this.documentDAO = documentDAO;
     }
 
@@ -47,7 +40,11 @@ public class SearchEngineService implements SearchEngine{
            return result;
     }
     public List<Document> listAll(){
-        //Arrays.asList(...) tworzy liste z tablicy getAll()
-        return Arrays.asList(documentDAO.getAll());
+        List<Document> result = Arrays.asList(documentDAO.getAll());
+        return result;
+    }
+
+    public List<Document> findByLocation(String location){
+        throw new UnsupportedOperationException("Metoda findByLocation not implemented.");
     }
 }
