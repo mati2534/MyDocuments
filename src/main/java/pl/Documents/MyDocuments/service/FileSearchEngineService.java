@@ -20,4 +20,7 @@ public class FileSearchEngineService implements SearchEngine{
     public List<Document> listAll(){
         throw new UnsupportedOperationException("Środowisko QA. Operacja jeszcze niezaimplementowana.");
     }
+    public List<Document> findByLocation(String location){
+        throw new UnsupportedOperationException("findByLocation not yet implemented.");
+    }
 }

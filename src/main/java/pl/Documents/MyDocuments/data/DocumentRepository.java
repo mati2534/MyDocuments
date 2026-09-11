@@ -20,15 +20,7 @@ public class DocumentRepository implements DocumentDAO {
     }
 
     public Document[] getAll(){
-        if(log.isDebugEnabled())
-        {
-            log.debug("Początek metody getAll(): ");
-        }
         Document[] result = documents.toArray(new Document[documents.size()]);
-        if(log.isDebugEnabled())
-        {
-            log.debug("Koniec metody getAll(): ");
-        }
         return result;
     }
 
