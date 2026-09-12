@@ -5,7 +5,6 @@ import org.aopalliance.intercept.MethodInvocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.reflect.Method;
 
 public class AroundLoggingModule implements MethodInterceptor {
     private static final Logger log = LoggerFactory.getLogger(AfterLoggingModule.class);
@@ -23,9 +22,10 @@ public class AroundLoggingModule implements MethodInterceptor {
         }
         try{
             if(log.isDebugEnabled()){
-                log.debug("@@@(AROUND-AFTER) Przetwarzanie...");
+                log.debug("@@@(AROUND) Przetwarzanie...");
             }
 
+            //W tym miejscu program przerywa działanie aspektu i uruchamia oryginalną metodę, którą ten aspekt otacza.
             result = invocation.proceed();
 
             if(log.isDebugEnabled()){
@@ -33,6 +33,8 @@ public class AroundLoggingModule implements MethodInterceptor {
             }
 
             return result;
+
+         //To wbudowany w Javę wyjątek, który oznacza „przekazano nieprawidłowy argument”.
         }catch (IllegalArgumentException ex){
             log.error("@@@(AROUND) Zgłasza wyjątek: " + ex.getMessage());
             throw ex;
