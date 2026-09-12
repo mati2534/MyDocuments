@@ -5,8 +5,7 @@
 
     <!--AOP before-->
     <!--Rejestruje klasę BeforeLoggingModule jako zwykły komponent Springa o nazwie beforeLogging.-->
-    <bean id="beforeLogging" class="pl.Documents.MyDocuments.aop.BeforeLoggingModule"/>
-
+    <bean id="afterLogging" class="pl.Documents.MyDocuments.aop.AfterLoggingModule"/>
 
     <!--AOP Proxy-->
     <bean id="engineProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
@@ -17,11 +16,10 @@
         <!--To lista aspektów, które mają zostać nałożone na obiekt docelowy. Wskazuje tu nazwę beana z kroku pierwszego (beforeLogging). Dzięki temu Spring wie, że przed wywołaniem jakiejkolwiek metody z komponentu engine musi najpierw uruchomić logowanie.-->
         <property name="interceptorNames">
             <list>
-                <value>beforeLogging</value>
+                <value>afterLogging</value>
             </list>
         </property>
     </bean>
-
 
     <!-- engine – tworzy obiekt klasy SearchEngineService.-->
     <bean id="engine" class="pl.Documents.MyDocuments.service.SearchEngineService">
