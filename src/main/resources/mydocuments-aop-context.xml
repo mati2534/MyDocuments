@@ -3,9 +3,9 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!--AOP before-->
+    <!--AOP -->
     <!--Rejestruje klasę BeforeLoggingModule jako zwykły komponent Springa o nazwie beforeLogging.-->
-    <bean id="aroundLogging" class="pl.Documents.MyDocuments.aop.AroundLoggingModule"/>
+    <bean id="caching" class="pl.Documents.MyDocuments.aop.CachingModule"/>
 
     <!--AOP Proxy-->
     <bean id="engineProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
@@ -16,7 +16,7 @@
         <!--To lista aspektów, które mają zostać nałożone na obiekt docelowy. Wskazuje tu nazwę beana z kroku pierwszego (beforeLogging). Dzięki temu Spring wie, że przed wywołaniem jakiejkolwiek metody z komponentu engine musi najpierw uruchomić logowanie.-->
         <property name="interceptorNames">
             <list>
-                <value>aroundLogging</value>
+                <value>caching</value>
             </list>
         </property>
     </bean>

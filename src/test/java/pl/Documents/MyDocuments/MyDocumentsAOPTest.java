@@ -45,4 +45,26 @@ public class MyDocumentsAOPTest {
         }
     }
 
+    @Test
+    public void testUsingSpringAOPCaching(){
+        log.debug("Testowanie modułu buforowania...");
+
+
+        List<Document> documents = engineProxy.findByType(webType);
+        assertNotNull(documents);
+        int count = documents.size();
+
+        log.debug("Obiekt powinien być już w buforze!");
+        documents =engineProxy.findByType(webType);
+        assertNotNull(documents);
+        assertEquals(count, documents.size());
+
+        log.debug("Obiekt powinien być już w buforze!");
+        documents =engineProxy.findByType(webType);
+        assertNotNull(documents);
+        assertEquals(count, documents.size());
+
+
+    }
+
 }
